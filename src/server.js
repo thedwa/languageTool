@@ -36,12 +36,12 @@ app.post('/api/generate-gap-text', async (req, res) => {
   
       const json = await response.json();
       res.send(json);
+      console.log(json);
     } catch (error) {
       res.status(500).send({ message: 'Error making request to OpenAI API' });
     }
   });
   
-
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

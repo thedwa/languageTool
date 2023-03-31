@@ -18,15 +18,23 @@
 		</nav>
 	</header>
 	<main>
+
+        <div class="overlay">
+            <div class="spinner"></div>
+          </div>
+          
 		<h1 class="main-heading">Generate Gap Text</h1>
 		<form class="gap-text-form">
 			<div class="form-question">
 				<p class="form-text">Generate a gap text in 
 					<select class="select" id="languageMC" name="languageMC">
-						<option value="French">French</option>
-						<option value="Italian">Italian</option>
-						<option value="Spanish">Spanish</option>
-						<option value="English">English</option>
+						<option value="Französisch">French</option>
+						<option value="Italienisch">Italian</option>
+						<option value="Spanisch">Spanish</option>
+						<option value="Englisch">English</option>
+                        <option value="Portugisisch">Portugisisch</option>
+                        <option value="Niederländisch">Niederländisch</option>
+                        <option value="Koreanisch">Koreanisch</option>
 					</select>, with 
 					<select class="select" id="gapsMC" name="gapsMC">
 						<option value="5">5</option>
@@ -69,26 +77,26 @@
 						<option value="mixed times">Mixed Times</option>
 					</select> and the following verbs: 
 					<select class="select" id="verbsMC" name="verbsMC">
-						<option value="be">To Be</option>
-						<option value="have">Have</option>
-						<option value="do">Do</option>
-						<option value="say">Say</option>
-						<option value="get">Get</option>
-						<option value="make">Make</option>
-						<option value="go">Go</option>
-						<option value="know">Know</option>
-						<option value="take">Take</option>
-						<option value="see">See</option>
-						<option value="come">Come</option>
-						<option value="think">Think</option>
-						<option value="look">Look</option>
-						<option value="want">Want</option>
-						<option value="give">Give</option>
-						<option value="use">Use</option>
-						<option value="find">Find</option>
-						<option value="tell">Tell</option>
-						<option value="ask">Ask</option>
-						<option value="work">Work</option>
+						<option value="to be">To Be</option>
+						<option value="to have">To Have</option>
+						<option value="to do">To Do</option>
+						<option value="to say">To Say</option>
+						<option value="to get">To Get</option>
+						<option value="to make">To Make</option>
+						<option value="to go">To Go</option>
+						<option value="to know">To Know</option>
+						<option value="to take">To Take</option>
+						<option value="to see">To See</option>
+						<option value="to come">To Come</option>
+						<option value="to think">To Think</option>
+						<option value="to look">To Look</option>
+						<option value="to want">To Want</option>
+						<option value="to give">To Give</option>
+						<option value="to use">To Use</option>
+						<option value="to find">To Find</option>
+						<option value="to tell">To Tell</option>
+						<option value="to ask">To Ask</option>
+						<option value="to work">To Work</option>
 					</select>.
 				</p>
 				<input type="submit" class="submit-btn" value="Generate">
