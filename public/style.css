@@ -42,7 +42,8 @@ body {
   }
   
   /* Form */
-  .gap-text-form {
+  .gap-text-form,
+  .block-text-form {
     background-color: #ffffff;
     border: 3px solid #f48fb1;
     border-radius: 10px;
@@ -169,5 +170,19 @@ body {
   
   .solution-block p {
     margin: 0;
+  }
+  .topicInput {
+    border: 2px solid #fff1f6;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+  
+  .topicInput:focus {
+    outline: none;
+    border-color: #f48fb1;
+    box-shadow: 0 0 5px #f48fb1;
   }
   

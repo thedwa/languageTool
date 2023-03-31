@@ -2,13 +2,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Reading Comprehension</title>
+	<title>Gap Text</title>
 	<link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
 	<header>
 		<nav>
-			<ul>
+			<ul class="nav-menu">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="gapText.html">Gap Text</a></li>
 				<li><a href="readingComprehension.html">Reading Comprehension</a></li>
@@ -17,8 +18,59 @@
 		</nav>
 	</header>
 	<main>
-		<h1>Reading Comprehension</h1>
-		<p>This is the Reading Comprehension page. More content can be added here.</p>
-	</main>
+
+        <div class="overlay">
+            <div class="spinner"></div>
+          </div>
+          
+		<h1 class="main-heading">Generate Reading Comprehension Text</h1>
+		<form class="block-text-form">
+			<div class="form-question">
+                <div class="form-question">
+                    <p class="form-text">Generate a 
+                        <select class="select" id="languageMC" name="languageMC">
+                            <option value="Französisch">French</option>
+                            <option value="Italienisch">Italian</option>
+                            <option value="Spanisch">Spanish</option>
+                            <option value="Englisch">English</option>
+                            <option value="Portugisisch">Portugisisch</option>
+                            <option value="Niederländisch">Niederländisch</option>
+                            <option value="Koreanisch">Koreanisch</option>
+                            <option value="Deutsch">German</option>
+                        </select> text in 
+                        <select class="select" id="timeMC" name="timeMC">
+                            <option value="present simple">Present Simple</option>
+                            <option value="past simple">Past Simple</option>
+                            <option value="future">Future</option>
+                            <option value="mixed times">Mixed Times</option>
+                        </select>, with
+                        <select class="select" id="lengthMC" name="lengthMC">
+                            <option value="40">40</option>
+                            <option value="60">60</option>
+                            <option value="80">80</option>
+                            <option value="100">100</option>
+                            <option value="120">120</option>
+                            <option value="140">140</option>
+                        </select> words, and language level 
+                        <select class="select" id="levelMC" name="levelMC">
+                            <option value="A1">A1</option>
+                            <option value="A2">A2</option>
+                            <option value="B1">B1</option>
+                            <option value="B2">B2</option>
+                            <option value="C1">C1</option>
+                            <option value="C2">C2</option>
+                        </select>. The topic should be about 
+                        <input class="topicInput" type="text" id="topicInput" name="topicInput" placeholder="Enter your topic">
+                    </p>
+                    <input type="submit" class="submit-btn" value="Generate">
+                </div>
+            </div>
+        </form>
+    
+        <div class="solution-container">
+            <h2 class="solution-heading">Result:</h2>
+            <p class="solution-text">The resulting text will appear here.</p>
+        </div>
+    </main>
 </body>
 </html>
