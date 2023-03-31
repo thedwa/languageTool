@@ -1,0 +1,21 @@
+{
+  "name": "languagetool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/thedwa/languageTool.git",
+  "keywords": [],
+  "author": "Theodore Wanner <wanner.theodore@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thedwa/languageTool/issues"
+  },
+  "homepage": "https://github.com/thedwa/languageTool#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1"
+  }
+}
