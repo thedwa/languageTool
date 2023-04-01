@@ -2,10 +2,14 @@
 // const fetch = require('node-fetch');
 require('dotenv').config();
 
-
-
 const express = require('express');
 const path = require('path');
+const { join } = require('path');
+
+
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(join(__dirname, '../data/vocabulary.db'));
+db.run('CREATE TABLE IF NOT EXISTS vocabulary (id INTEGER PRIMARY KEY, word TEXT, language TEXT)');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -42,6 +46,36 @@ app.post('/api/generate-gap-text', async (req, res) => {
     }
   });
   
+// set up the SQLite database endpoint - to save words to the database
+  app.post('/api/save-word', (req, res) => {
+    const { word, language } = req.body;
+  
+    const stmt = db.prepare('INSERT INTO vocabulary (word, language) VALUES (?, ?)');
+    stmt.run(word, language, (err) => {
+      if (err) {
+        res.status(500).send({ error: err.message });
+      } else {
+        res.status(200).send({ message: 'Word saved successfully' });
+      }
+    });
+    stmt.finalize();
+  });
+  
+// fetch words from the database
+
+  app.get('/api/get-words', (req, res) => {
+    db.all('SELECT * FROM vocabulary', [], (err, rows) => {
+      if (err) {
+        res.status(500).send({ error: err.message });
+      } else {
+        res.status(200).send({ words: rows });
+      }
+    });
+  });
+  
+
+
+//start the port
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Vocabulary</title>
 	<link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
+
 </head>
 <body>
 	<header>
@@ -16,4 +18,48 @@
 			</ul>
 		</nav>
 	</header>
-	<main>
+    <main>
+        <div class="overlay">
+            <div class="spinner"></div>
+        </div>
+		<h1 class="main-heading">Vocabulary</h1>
+        <button id="addVocabularyBtn">Add Vocabulary</button>
+        <div class="solution-container">
+
+            <table id="vocabularyTable">
+                <!-- Table headers and structure -->
+              </table>
+              
+        </div>
+    </main>
+
+    <div class="popup" id="addVocabularyPopup">
+        <div class="popup-content">
+            <span class="close-btn" id="closeAddVocabularyPopup">&times;</span>
+            <h2>Add Vocabulary</h2>
+            <form id="addVocabularyForm">
+                <label for="newVocabulary">New Vocabulary:</label>
+                <input type="text" id="newVocabulary" name="newVocabulary" required>
+                <select class="selectSmall" id="languageSelect" name="languageSelect">
+                    <option value="Französisch">French</option>
+                    <option value="Italienisch">Italian</option>
+                    <option value="Spanisch">Spanish</option>
+                    <option value="Englisch">English</option>
+                    <option value="Portugisisch">Portugisisch</option>
+                    <option value="Niederländisch">Niederländisch</option>
+                    <option value="Koreanisch">Koreanisch</option>
+                </select>
+
+                <button class="smallButton" type="submit">Add</button>
+            </form>
+            <h2>OR</h2>
+            <form id="uploadGoogleSheetsForm">
+                <label for="googleSheetsLink">Google Sheets Link:</label>
+                <input type="text" id="googleSheetsLink" name="googleSheetsLink" required>
+                <button class="smallButton" type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+	
+</body>
+</html>

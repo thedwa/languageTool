@@ -66,10 +66,10 @@ body {
   .select,
   .number-input {
     border: 2px solid #fff1f6;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #222222;
-    font-size: 20px;
-    padding: 10px;
+    font-size: 18px;
+    padding: 5px;
     margin-right: 20px;
   }
   
@@ -186,3 +186,126 @@ body {
     box-shadow: 0 0 5px #f48fb1;
   }
   
+  /* Popup styles */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.popup-content {
+    background-color: #ffffff;
+    border: 3px solid #f48fb1;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 60px;
+    padding: 30px;
+    max-width: 600px;
+}
+.popup-heading {
+    color: #f48fb1;
+    font-size: 30px;
+    margin: 0 0 20px;
+}
+.popup-input {
+    border: 2px solid #fff1f6;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 10px;
+    margin-right: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.popup-input:focus {
+    outline: none;
+    border-color: #f48fb1;
+    box-shadow: 0 0 5px #f48fb1;
+}
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+.popup-buttons button {
+    background-color: #f48fb1;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 20px;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+.popup-buttons button:hover {
+    background-color: #d15b8f;
+}
+.close-btn {
+    float: right;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #f48fb1;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+.close-btn:hover {
+    color: #d15b8f;
+}
+
+.show {
+    display: block;
+  }
+
+  #addVocabularyBtn {
+    background-color: #f48fb1;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 5px 10px;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .smallButton {
+    background-color: #f48fb1;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+    padding: 5px 10px;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .selectSmall {
+    border: 1px solid #fff1f6;
+    border-radius: 5px;
+    color: #222222;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+
+  th {
+    background-color: #f48fb1;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    text-align: left;
+  }
