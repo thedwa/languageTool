@@ -309,3 +309,36 @@ body {
     padding-left: 30px;
     text-align: left;
   }
+
+  .indexHeader {
+    color: #f48fb1;
+  }
+
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .rotating-word {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in 1; /* fade-in effect */
+  }
+  
+  .fade-out {
+    animation: fadeOut 0.5s ease-out 1; /* fade-out effect */
+  }
+  
