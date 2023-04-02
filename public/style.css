@@ -312,6 +312,9 @@ body {
 
   .indexHeader {
     color: #f48fb1;
+    font-size: 56px;
+    text-align: center;
+    margin: 56px;
   }
 
 
