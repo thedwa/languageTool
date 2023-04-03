@@ -366,9 +366,17 @@ body {
     color: #003366;
     font-size: 16px;
     font-weight: bold;
-    margin-right: 16px;
+    margin-right: 0px;
+    margin-left: 16px;
   }
   
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+}
+
   .banner-image {
     max-width: 60%;
     height: auto;
@@ -378,4 +386,16 @@ body {
   
 .indexHeader {
     width: 50vw;
+}
+
+.image-small {
+    width: 15vw;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.image-large {
+    width: 30vw;
+    border-radius: 10px;
+    padding: 5px;
 }
