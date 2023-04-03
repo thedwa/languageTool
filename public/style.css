@@ -345,3 +345,37 @@ body {
     animation: fadeOut 0.5s ease-out 1; /* fade-out effect */
   }
   
+  .banner {
+    background: linear-gradient(to bottom, rgb(13,46,69), rgb(45,83,152));
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .banner h2 {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .banner-button {
+    padding: 12px 24px;
+    border-radius: 30px;
+    background-color: white;
+    color: #003366;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 16px;
+  }
+  
+  .banner-image {
+    max-width: 60%;
+    height: auto;
+    margin-left: 16px;
+    border-radius: 15px;
+  }
+  
+.indexHeader {
+    width: 50vw;
+}

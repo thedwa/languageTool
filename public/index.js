@@ -70,9 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": `Verhalte dich wie ein Lehrer. Schreibe einen Text auf ${languageMC} mit ungefähr ${lengthMC} Wörter auf dem Sprachniveau ${levelMC}. Brauche die Zeitform ${timeMC}. Stelle dann 5 Fragen zum Inhalt vom Text. Dabei geht es um das Thema ${topicInput}`}],
+        "messages": [{"role": "user", "content": `Verhalte dich wie ein Lehrer. Schreibe einen Text auf ${languageMC} mit ungefähr ${lengthMC} Wörter auf dem Sprachniveau ${levelMC}. 
+        Brauche die Zeitform ${timeMC}. Stelle dann 5 Fragen zum Inhalt vom Text. Dabei geht es um das Thema ${topicInput}`}],
         "temperature": 0.1
       }
+      console.log(data.messages);
       
       const response = await fetch('/api/generate-gap-text', {
         method: 'POST',
