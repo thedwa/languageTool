@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": `Schreibe einen Lückentext auf ${languageMC} mit genau ${gapsMC} Lücken (nicht mehr und nicht weniger) auf dem Sprachniveau ${levelMC}. Brauche die Zeitform ${timeMC}. In den Lücken sollten die Formen vom Verb ${verbsMC} in Einzahl oder Mehrzahl konjugiert werden. Liste unten die Lösungswörter auf!`}],
+        "messages": [{"role": "user", "content": `Schreibe einen Lückentext auf ${languageMC} mit genau ${gapsMC} Lücken (nicht mehr und nicht weniger) auf dem Sprachniveau ${levelMC}. Brauche die Zeitform ${timeMC}. In den Lücken sollte das konjugierte Verb ${verbsMC} in Einzahl oder Mehrzahl sein. Liste weiter unten sämtliche fehlenden konjugierten Verben in der richtigen Reihenfolge auf, welche den Text vervollständigen!`}],
         "temperature": 0.1
       }
       
@@ -208,6 +208,32 @@ async function saveWord(word, language) {
     }
   }
   
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// multiselect for verb dropdown
+const selectElement = document.getElementById('verbsMC');
+const options = selectElement.getElementsByTagName('option');
+
+for (let i = 0; i < options.length; i++) {
+  const option = options[i];
+  const checkbox = document.createElement('input');
+  const text = document.createElement('span');
+
+  checkbox.type = 'checkbox';
+  checkbox.className = 'select-checkbox';
+  checkbox.onclick = function() {
+    option.selected = checkbox.checked;
+  };
+
+  text.className = 'select-option-text';
+  text.textContent = option.textContent;
+
+  option.textContent = '';
+  option.appendChild(checkbox);
+  option.appendChild(text);
+}
+
+
   // Call fetchWords on page load or when you want to update the table
   fetchWords();
   

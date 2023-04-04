@@ -6,6 +6,13 @@
 	<link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="index.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Add the Select2 CSS file -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Add jQuery and Select2 JavaScript files -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
 </head>
 <body>
 	<header>
@@ -77,7 +84,7 @@
 						<option value="future">Future</option>
 						<option value="mixed times">Mixed Times</option>
 					</select> and the following verbs: 
-					<select class="select" id="verbsMC" name="verbsMC">
+                    <select  class="select" id="verbsMC" name="verbsMC" multiple style="width: 80%;">                  
 						<option value="to be">To Be</option>
 						<option value="to have">To Have</option>
 						<option value="to do">To Do</option>
@@ -98,7 +105,12 @@
 						<option value="to tell">To Tell</option>
 						<option value="to ask">To Ask</option>
 						<option value="to work">To Work</option>
-					</select>.
+					</select>
+                    <script>
+                        $(document).ready(function() {
+                          $('#verbsMC').select2();
+                        });
+                      </script>        
 				</p>
 				<input type="submit" class="submit-btn" value="Generate">
             </div>
