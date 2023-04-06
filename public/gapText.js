@@ -39,21 +39,72 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(data);
       
       const json = await response.json();
-      const solution = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No solution found.';
+      const gapText = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No solution found.';
       console.log("the solution is: ")
-      console.log(solution);
+      console.log(gapText);
 
       solutionText.innerHTML = `<ul class="solution-list">
                                     <li><strong>Verb:</strong> ${verbsMC}</li>
                                     <li><strong>Level:</strong> ${levelMC}</li>
                                     <li><strong>Time:</strong> ${timeMC}</li>
-                                </ul>
-                                <div class="solution-block">
-                                    <h3>Solution:</h3>
-                                    <p>${solution.replace(/\n/g, '<br>')}</p>
-                                </div>
-                                `;
+                                </ul>`
+                                //<div class="solution-block">
+                                //    <h3>Solution:</h3>
+                                //    <p>${gapText.replace(/\n/g, '<br>')}</p>
+                                //</div>
+                                ;
        setLoading(false); // Hide the overlay and spinner
+
+
+      // create the "gap text" for the user
+
+        // Split the input string into text and solution
+        const [_, text, solutionString] = gapText.match(/Text:([\s\S]*?)Lösung:([\s\S]*)/);
+
+        // Extract the solution words from the solution string
+        const solution = {};
+        solutionString.replace(/\((\d+)\)\s*(\S+)/g, (_, number, word) => {
+        solution[number] = word;
+        });
+
+        // Now, use the 'text' and 'solution' variables in the previous example
+        // Replace placeholders with input fields
+        const gapTextWithInputs = text.replace(/___\((\d+)\)/g, (_, number) => {
+        return `<input type="text" data-number="${number}" class="gap-input" size="8">`;
+        });
+
+
+        const gapTextElement = document.getElementById("gapText");
+        gapTextElement.innerHTML = gapTextWithInputs;
+
+        // Handle the "Show Solution" button click
+        const showSolutionBtn = document.getElementById("showSolutionBtn");
+        const feedbackElement = document.getElementById("feedback");
+
+        showSolutionBtn.addEventListener("click", () => {
+        const inputs = document.getElementsByClassName("gap-input");
+        let correctAnswers = 0;
+        let feedback = "";
+
+        for (const input of inputs) {
+            const number = input.getAttribute("data-number");
+            const userAnswer = input.value.trim();
+
+            if (userAnswer === solution[number]) {
+            feedback += `(${number}) Correct! <br>`;
+            correctAnswers++;
+            } else {
+            feedback += `(${number}) Incorrect. The correct answer is "${solution[number]}".<br>`;
+            }
+        }
+
+        feedback += `You got ${correctAnswers} out of ${inputs.length} correct!`;
+        feedbackElement.innerHTML = feedback;
+        });
+
+
+
+       
     });
 }
 });
