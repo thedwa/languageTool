@@ -11,6 +11,7 @@ const vocabForm = popup.querySelector("#addVocabularyForm");
 // Add event listener to open popup when add vocabulary button is clicked
 addVocabButton.addEventListener("click", () => {
   popup.classList.add("show");
+  
 });
 
 // Add event listener to close popup when close button is clicked
@@ -49,6 +50,7 @@ async function saveWord(word, language) {
   } catch (err) {
     console.error("Error:", err);
   }
+  location.reload();
 }
 
 vocabForm.addEventListener("submit", (e) => {
