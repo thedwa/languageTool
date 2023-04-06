@@ -61,25 +61,28 @@ vocabForm.addEventListener("submit", (e) => {
 
 // create the table in the vocabulary.html page
 function createTable(data) {
-  const table = document.getElementById("vocabularyTable");
-  const tableHead = `
-    <tr>
-      <th>ID</th>
-      <th>Word</th>
-      <th>Language</th>
-    </tr>`;
-  table.innerHTML = tableHead;
-
-  data.forEach((row) => {
-    const tableRow = document.createElement("tr");
-    tableRow.innerHTML = `
-      <td>${row.id}</td>
-      <td>${row.word}</td>
-      <td>${row.language}</td>`;
-    table.appendChild(tableRow);
-  });
-}
-
+    const table = document.getElementById("vocabularyTable");
+    const tableHead = `
+      <tr>
+        <th>ID</th>
+        <th>Word</th>
+        <th>Language</th>
+        <th>Delete</th>
+      </tr>`;
+    table.innerHTML = tableHead;
+  
+    data.forEach((row) => {
+      const tableRow = document.createElement("tr");
+      tableRow.innerHTML = `
+        <td>${row.id}</td>
+        <td>${row.word}</td>
+        <td>${row.language}</td>
+        <td><button class="delete-btn" data-id="${row.id}">x</button></td>`;
+      table.appendChild(tableRow);
+    });
+  }
+  
+// Fetch words from the database
 async function fetchWords() {
   try {
     const response = await fetch("/api/get-words");
@@ -89,6 +92,31 @@ async function fetchWords() {
     console.error("Error:", err);
   }
 }
+
+// Delete a word from the database
+async function deleteWord(id) {
+    try {
+      const response = await fetch(`/api/delete-word/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log(data.message);
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  }
+
+  // Event listener for delete buttons
+  const table = document.getElementById("vocabularyTable");
+table.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const id = e.target.dataset.id;
+    await deleteWord(id);
+    e.target.parentElement.parentElement.remove();
+  }
+});
+
+  
 
 // Call fetchWords on page load or when you want to update the table
 fetchWords();

@@ -73,6 +73,23 @@ app.get('/api/get-words', (req, res) => {
       }
     });
   });
+
+
+// Delete a word from the database
+app.delete("/api/delete-word/:id", async (req, res) => {
+    const { id } = req.params;
+    // Delete the word from the database using the 'id'
+    const stmt = db.prepare("DELETE FROM vocabulary WHERE id = ?");
+    stmt.run(id, (err) => {
+      if (err) {
+        res.status(500).send({ error: err.message });
+      } else {
+        res.status(200).json({ message: "Word deleted successfully" });
+      }
+    });
+    stmt.finalize();
+  });
+  
   
   
 
