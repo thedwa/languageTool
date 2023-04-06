@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Solution:
         (1) have
         (2) am turning`,
-            "French": `Écris un texte à trous en ${languageMC} dans le format suivant. Le texte à trous doit avoir exactement ${gapsMC} trous (pas plus et pas moins), est écrit en ${languageMC} et les trous sont des verbes conjugués (seulement les verbes ${verbsMC}, au singulier et au pluriel). Écris le texte au niveau de langue ${levelMC} au temps ${timeMC}.
-        Format :
+            "French": `Écris un texte à trous en ${languageMC} dans le format suivant. Le texte à trous doit avoir exactement ${gapsMC} trous (ni plus ni moins), est écrit en ${languageMC} et les trous sont des verbes conjugués (seulement les verbes ${verbsMC}, au singulier et au pluriel). Écris le texte au niveau de langue ${levelMC} au temps ${timeMC}.
+        Exemple de format (Crée un texte avec ${gapsMC} trous):
         Texte: J'___(1) anniversaire. J'___(2) 30 ans.
         Solution:
         (1) ai
@@ -136,10 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const userAnswer = input.value.trim();
 
             if (userAnswer === solution[number]) {
-            feedback += `(${number}) Correct! <br>`;
+            feedback += `(${number}) ✅ Correct! <br>`;
             correctAnswers++;
             } else {
-            feedback += `(${number}) Incorrect. The correct answer is "${solution[number]}".<br>`;
+            feedback += `(${number}) ❌ Incorrect. The correct answer is "${solution[number]}".<br>`;
             }
         }
 
