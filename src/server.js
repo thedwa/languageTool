@@ -1,5 +1,5 @@
 // Remove the following line
-// const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 require('dotenv').config();
 
 const express = require('express');
@@ -63,7 +63,8 @@ app.post('/api/generate-gap-text', async (req, res) => {
   
 // fetch words from the database
 
-  app.get('/api/get-words', (req, res) => {
+app.get('/api/get-words', (req, res) => {
+    console.log("GET /api/get-words called"); // Add this line
     db.all('SELECT * FROM vocabulary', [], (err, rows) => {
       if (err) {
         res.status(500).send({ error: err.message });
@@ -72,6 +73,7 @@ app.post('/api/generate-gap-text', async (req, res) => {
       }
     });
   });
+  
   
 
 
