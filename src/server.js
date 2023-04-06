@@ -64,7 +64,6 @@ app.post('/api/generate-gap-text', async (req, res) => {
 // fetch words from the database
 
 app.get('/api/get-words', (req, res) => {
-    console.log("GET /api/get-words called"); // Add this line
     db.all('SELECT * FROM vocabulary', [], (err, rows) => {
       if (err) {
         res.status(500).send({ error: err.message });
