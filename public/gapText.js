@@ -15,19 +15,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeMC = document.querySelector('#timeMC').value;
     const verbsMC = [...document.querySelector('#verbsMC').selectedOptions].map(option => option.value).join(", ");
 
-    const data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": `Schreibe mir einen ${languageMC} Lückentext im untenstehenden Format. 
-        Der Lückentext soll genau ${gapsMC} Lücken haben, ist auf ${languageMC} geschrieben und die Lücken sind jeweils konjugierte Verben (nur die Verben ${verbsMC}, in Einzahl und Mehrzahl). 
-        Schreibe dem Text auf dem Sprachniveau ${levelMC} in der Zeitform ${timeMC}. 
+    const languagePrompts = {
+        "German": `Schreibe mir einen ${languageMC} Lückentext im untenstehenden Format. Der Lückentext soll genau ${gapsMC} Lücken haben, ist auf ${languageMC} geschrieben und die Lücken sind jeweils konjugierte Verben (nur die Verben ${verbsMC}, in Einzahl und Mehrzahl). Schreibe dem Text auf dem Sprachniveau ${levelMC} in der Zeitform ${timeMC}.
         Format:
         Text: Ich ___(1) Geburtstag. Ich ___(2) 30 Jahre alt.
-        Lösung: 
+        Lösung:
         (1) habe
-        (2) werde
+        (2) werde`,
+            "English": `Write a ${languageMC} gap text in the following format. The gap text should have exactly ${gapsMC} gaps, is written in ${languageMC}, and the gaps are conjugated verbs (only the verbs ${verbsMC}, in singular and plural). Write the text at the ${levelMC} language level in the ${timeMC} tense.
+        Format:
+        Text: I ___(1) a birthday. I ___(2) 30 years old.
+        Solution:
+        (1) have
+        (2) am turning`,
+            "French": `Écris un texte à trous en ${languageMC} dans le format suivant. Le texte à trous doit avoir exactement ${gapsMC} trous (pas plus et pas moins), est écrit en ${languageMC} et les trous sont des verbes conjugués (seulement les verbes ${verbsMC}, au singulier et au pluriel). Écris le texte au niveau de langue ${levelMC} au temps ${timeMC}.
+        Format :
+        Texte: J'___(1) anniversaire. J'___(2) 30 ans.
+        Solution:
+        (1) ai
+        (2) aurai`,
+            "Italian": `Scrivi un testo con lacune in ${languageMC} nel seguente formato. Il testo con lacune deve avere esattamente ${gapsMC} lacune, è scritto in ${languageMC} e le lacune sono verbi coniugati (solo i verbi ${verbsMC}, al singolare e al plurale). Scrivi il testo al livello di lingua ${levelMC} nel tempo ${timeMC}.
+        Formato:
+        Testo: Io ___(1) compleanno. Io ___(2) 30 anni.
+        Soluzione:
+        (1) ho
+        (2) compio`,
+            "Spanish": `Escribe un texto con huecos en ${languageMC} en el siguiente formato. El texto con huecos debe tener exactamente ${gapsMC} huecos, está escrito en ${languageMC} y los huecos son verbos conjugados (solo los verbos ${verbsMC}, en singular y plural). Escribe el texto en el nivel de lengua ${levelMC} en el tiempo ${timeMC}.
+        Formato:
+        Texto: Yo ___(1) cumpleaños. Yo ___(2) 30 años.
+        Solución:
+        (1) tengo
+        (2) cumplo`,
+        "Dutch": `Schrijf een ${languageMC} tekst met lege plekken in het volgende formaat. De tekst met lege plekken moet precies ${gapsMC} lege plekken bevatten, is geschreven in ${languageMC} en de lege plekken zijn vervoegde werkwoorden (alleen de werkwoorden ${verbsMC}, enkelvoud en meervoud). Schrijf de tekst op het ${levelMC} taalniveau in de ${timeMC} tijd.
+        Formaat:
+        Tekst: Ik ___(1) verjaardag. Ik ___(2) 30 jaar oud.
+        Oplossing:
+        (1) heb
+        (2) word`
+    };
+    console.log("the prompt  is: ");
+      
+      const prompt = languagePrompts[languageMC];
+      console.log(prompt);
+      const data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": `${prompt} 
+
         `}],
         "temperature": 0.1
       }
+      
      
       const response = await fetch('/api/generate-gap-text', {
         method: 'POST',
@@ -36,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(data),
       });
-      console.log(data);
       
       const json = await response.json();
       const gapText = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No solution found.';
@@ -59,14 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
       // create the "gap text" for the user
 
         // Split the input string into text and solution
-        const [_, text, solutionString] = gapText.match(/Text:([\s\S]*?)Lösung:([\s\S]*)/);
+        function splitInputIntoTextAndSolution(inputString) {
+            // Split the input string into text and solution
+            // Match different variations of 'Text' and 'Solution' keywords
+            const [_, text, solutionString] = inputString.match(/(?:Text|Texte|Texto|Testo|Tekst):([\s\S]*?)(?:Lösung|Solution|Solución|Soluzione|Oplossing):([\s\S]*)/);
+          
+            // Extract the solution words from the solution string
+            const solution = {};
+            solutionString.replace(/\((\d+)\)\s*(\S+)/g, (_, number, word) => {
+              solution[number] = word;
+            });
+          
+            return [text, solution];
+          }
 
-        // Extract the solution words from the solution string
-        const solution = {};
-        solutionString.replace(/\((\d+)\)\s*(\S+)/g, (_, number, word) => {
-        solution[number] = word;
-        });
+        const [text, solution] = splitInputIntoTextAndSolution(gapText);
 
+          
         // Now, use the 'text' and 'solution' variables in the previous example
         // Replace placeholders with input fields
         const gapTextWithInputs = text.replace(/___\((\d+)\)/g, (_, number) => {
