@@ -22,7 +22,7 @@
         "French": `Agissez comme un professeur. Écrivez un texte en ${languageMC} avec environ ${lengthMC} mots au niveau de langue ${levelMC}. Utilisez la forme temporelle ${timeMC}. Posez ensuite 5 questions sur le contenu du texte. Il s'agit du sujet ${topicInput}`,
         "Spanish": `Actúa como un profesor. Escribe un texto en ${languageMC} con aproximadamente ${lengthMC} palabras en el nivel de idioma ${levelMC}. Utilice la forma temporal ${timeMC}. Luego haga 5 preguntas sobre el contenido del texto. Se trata del tema ${topicInput}`,
         "Italian": `Agisci come un insegnante. Scrivi un testo in ${languageMC} con circa ${lengthMC} parole al livello linguistico ${levelMC}. Usa il tempo ${timeMC}. Poi fai 5 domande sul contenuto del testo. È un argomento ${topicInput}`,
-        "Portuguese": `Atue como um professor. Escreva um texto em ${languageMC} com cerca de ${lengthMC} palavras no nível de linguagem ${levelMC}. Use o tempo ${timeMC}. Em seguida, faça 5 perguntas sobre o conteúdo do texto. É sobre o tema ${topicInput}`
+        "Dutch": `Doe alsof je een leraar bent. Schrijf een tekst in ${languageMC} met ongeveer ${lengthMC} woorden op het taalniveau ${levelMC}. Gebruik de tijdvorm ${timeMC}. Stel dan 5 vragen over de inhoud van de tekst. Het gaat over het onderwerp ${topicInput}`,
     };
     
     console.log("the prompt  is: ");
@@ -35,35 +35,11 @@
         "messages": [{"role": "user", "content": `${prompt} 
 
         `}],
-        "temperature": 0.1
+        "temperature": 0.7
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       console.log(data.messages);
       
-
-
-
-
-
-
-
-
-
-
       const response = await fetch('/api/generate-gap-text', {
         method: 'POST',
         headers: {
