@@ -15,14 +15,55 @@
     const timeMC = document.querySelector('#timeMC').value;
     const topicInput = document.querySelector('#topicInput').value;
 
+
+      const languagePrompts = {
+        "German": `Verhalte dich wie ein Lehrer. Schreibe einen Text auf ${languageMC} mit ungefähr ${lengthMC} Wörter auf dem Sprachniveau ${levelMC}. Brauche die Zeitform ${timeMC}. Stelle dann 5 Fragen zum Inhalt vom Text. Dabei geht es um das Thema ${topicInput}`,
+        "English": `Act like a teacher. Write a text in ${languageMC} with about ${lengthMC} words on the language level ${levelMC}. Use the time form ${timeMC}. Then ask 5 questions about the content of the text. It's about the topic ${topicInput}`,
+        "French": `Agissez comme un professeur. Écrivez un texte en ${languageMC} avec environ ${lengthMC} mots au niveau de langue ${levelMC}. Utilisez la forme temporelle ${timeMC}. Posez ensuite 5 questions sur le contenu du texte. Il s'agit du sujet ${topicInput}`,
+        "Spanish": `Actúa como un profesor. Escribe un texto en ${languageMC} con aproximadamente ${lengthMC} palabras en el nivel de idioma ${levelMC}. Utilice la forma temporal ${timeMC}. Luego haga 5 preguntas sobre el contenido del texto. Se trata del tema ${topicInput}`,
+        "Italian": `Agisci come un insegnante. Scrivi un testo in ${languageMC} con circa ${lengthMC} parole al livello linguistico ${levelMC}. Usa il tempo ${timeMC}. Poi fai 5 domande sul contenuto del testo. È un argomento ${topicInput}`,
+        "Portuguese": `Atue como um professor. Escreva um texto em ${languageMC} com cerca de ${lengthMC} palavras no nível de linguagem ${levelMC}. Use o tempo ${timeMC}. Em seguida, faça 5 perguntas sobre o conteúdo do texto. É sobre o tema ${topicInput}`
+    };
+    
+    console.log("the prompt  is: ");
+      
+    const prompt = languagePrompts[languageMC];
+    console.log(prompt);
+    
     const data = {
         "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": `Verhalte dich wie ein Lehrer. Schreibe einen Text auf ${languageMC} mit ungefähr ${lengthMC} Wörter auf dem Sprachniveau ${levelMC}. 
-        Brauche die Zeitform ${timeMC}. Stelle dann 5 Fragen zum Inhalt vom Text. Dabei geht es um das Thema ${topicInput}`}],
+        "messages": [{"role": "user", "content": `${prompt} 
+
+        `}],
         "temperature": 0.1
       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       console.log(data.messages);
       
+
+
+
+
+
+
+
+
+
+
       const response = await fetch('/api/generate-gap-text', {
         method: 'POST',
         headers: {
