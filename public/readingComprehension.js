@@ -75,13 +75,14 @@ function displayQuestionsWithInputs(solution) {
       <div class="solution-block">
           <h3>Text:</h3>
           <p>${text.replace(/\n/g, '<br>')}</p>
-          <h3 id="questionsh3" >Questions:</h3>
+          <h3 id="questionsh3" >Questions: </h3>
           ${questionsWithInputs}
           <button class="submit-answers smallButton">Submit Answers</button>
       </div>
   `;
     // Add event listener to the 'submit answers' button
     document.querySelector('.submit-answers').addEventListener('click', async () => {
+      setLoading(true, true); // Show the overlay and spinner, disable the button
 
       
       const answerInputs = document.querySelectorAll('.answer-input');
@@ -94,8 +95,9 @@ function displayQuestionsWithInputs(solution) {
         questions.forEach((question, index) => {
             prompt += `\n${index + 1}. ${question} (User's answer: ${answers[index]})`;
         });
-    
-        prompt += `\n\nPlease provide feedback on the user's answers and correct them if necessary.`;
+        
+        // place additional message here
+        prompt += `\n\nPlease act like a personal teacher and provide feedback on the user's answers and correct them if necessary. Correct spelling mistakes as well as grammar mistakes.`;
     
         // Send the prompt to the OpenAI API
         const data = {
@@ -123,22 +125,34 @@ function displayQuestionsWithInputs(solution) {
       const correctedAnswers = await sendAnswersForCorrection(text, questions, answers);
 
       // Display corrected answers
-      const correctedAnswersHTML = correctedAnswers.map((answer, index) => `<p>${index + 1}. ${answer}</p>`).join('');
+      const correctedAnswersHTML = correctedAnswers.map((answer, index) => `<p>${answer}</p>`).join('');
       solutionTextBlock.insertAdjacentHTML('beforeend', `<div class="feedback"><h3>Feedback:</h3><p>${correctedAnswersHTML.replace(/\n/g, '<br>')}</p></div>`);
+
+      setLoading(false, true); // Hide the overlay and spinner, enable the button
+
     });
 }
 
 
 
 //loader & spinner
-function setLoading(loading) {
+function setLoading(loading, disableButton = false) {
   const overlay = document.querySelector('.overlay');
+  const submitAnswersButton = document.querySelector('.submit-answers');
+  
   if (loading) {
-      overlay.style.display = 'flex';
+    overlay.style.display = 'flex';
+    if (disableButton) {
+      submitAnswersButton.setAttribute('disabled', 'disabled');
+    }
   } else {
-      overlay.style.display = 'none';
+    overlay.style.display = 'none';
+    if (disableButton) {
+      submitAnswersButton.removeAttribute('disabled');
+    }
   }
 }
+
 
 
 
