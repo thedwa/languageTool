@@ -25,10 +25,8 @@
         "Dutch": `Doe alsof je een leraar bent. Schrijf een tekst in ${languageMC} met ongeveer ${lengthMC} woorden op het taalniveau ${levelMC}. Gebruik de tijdvorm ${timeMC}. Stel dan 5 vragen over de inhoud van de tekst. Het gaat over het onderwerp ${topicInput}`,
     };
     
-    console.log("the prompt  is: ");
-      
     const prompt = languagePrompts[languageMC];
-    console.log(prompt);
+    console.log(`prompt: ${prompt}`);
     
     const data = {
         "model": "gpt-3.5-turbo",
