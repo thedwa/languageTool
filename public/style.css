@@ -501,3 +501,28 @@ body {
     border-bottom: white;
     box-shadow: none;
 }
+
+
+.answer-input {
+  resize: both;
+  margin-left: 10px;
+  margin: 20px;
+  width: 80%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 22px;
+  background-color: #f8f8f8;
+  padding: 3px
+}
+
+.corrected-answers h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.corrected-answers p {
+  margin-bottom: 10px;
+}
+#questionsh3 {
+  margin-top:  20px;
+}
