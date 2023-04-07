@@ -77,21 +77,55 @@ function displayQuestionsWithInputs(solution) {
           <p>${text.replace(/\n/g, '<br>')}</p>
           <h3 id="questionsh3" >Questions:</h3>
           ${questionsWithInputs}
-          <button class="smallButton">Submit Answers</button>
+          <button class="submit-answers smallButton">Submit Answers</button>
       </div>
   `;
     // Add event listener to the 'submit answers' button
     document.querySelector('.submit-answers').addEventListener('click', async () => {
+
+      
       const answerInputs = document.querySelectorAll('.answer-input');
       const answers = Array.from(answerInputs).map(input => input.value);
+
+      async function sendAnswersForCorrection(text, questions, answers) {
+        // Prepare the prompt for the OpenAI API
+        let prompt = `A text has been generated with the following content:\n\n${text}\n\nThe user was asked the following questions:\n`;
+    
+        questions.forEach((question, index) => {
+            prompt += `\n${index + 1}. ${question} (User's answer: ${answers[index]})`;
+        });
+    
+        prompt += `\n\nPlease provide feedback on the user's answers and correct them if necessary.`;
+    
+        // Send the prompt to the OpenAI API
+        const data = {
+            "model": "gpt-3.5-turbo",
+            "messages": [{"role": "user", "content": `${prompt}`}],
+            "temperature": 0.7
+        }
+    
+        const response = await fetch('/api/generate-gap-text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+    
+        const json = await response.json();
+        const feedback = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No feedback found.';
+        const correctedAnswers = feedback.split('\n');
+        return correctedAnswers;
+    }
+    
 
       // Send the text and answers to the OpenAI API for correction
       const correctedAnswers = await sendAnswersForCorrection(text, questions, answers);
 
       // Display corrected answers
       const correctedAnswersHTML = correctedAnswers.map((answer, index) => `<p>${index + 1}. ${answer}</p>`).join('');
-      solutionTextBlock.insertAdjacentHTML('beforeend', `<div class="corrected-answers"><h3>Corrected Answers:</h3>${correctedAnswersHTML}</div>`);
-  });
+      solutionTextBlock.insertAdjacentHTML('beforeend', `<div class="feedback"><h3>Feedback:</h3><p>${correctedAnswersHTML.replace(/\n/g, '<br>')}</p></div>`);
+    });
 }
 
 
