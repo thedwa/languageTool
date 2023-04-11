@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Gap Text</title>
 	<link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="readingComprehension.js" defer></script>
+    <script type="text/javascript" src="listening.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -26,11 +26,20 @@
           </div>
           
 		<h1 class="main-heading">Listen and answer the questions</h1>
-		<form class="block-text-form">
+        <div class="block-text-form">
 			<div class="form-question">
 
+                <form id="ttsForm">
+                    <label for="text">Enter text:</label>
+                    <textarea id="text" rows="5" cols="30"></textarea>
+                    <button type="submit">Convert Text to Speech</button>
+                </form>
+                <audio id="audioPlayer" controls>
+                    <source id="audioSource" src="" type="audio/mpeg">
+                </audio>
+
             </div>
-        </form>
+        </div>
     
         <div class="solution-container">
             <h2 class="solution-heading">Result:</h2>

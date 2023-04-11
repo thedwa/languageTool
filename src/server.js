@@ -90,7 +90,70 @@ app.delete("/api/delete-word/:id", async (req, res) => {
   });
   
   
-  
+// Add the Play.ht API endpoint ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+app.post('/api/text-to-speech', async (req, res) => {
+  const { text } = req.body;
+
+  try {
+    const fetch = (await import('node-fetch')).default;
+    const response = await fetch('https://play.ht/api/v1/convert', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': process.env.PLAYHT_API_KEY,
+        'X-User-ID': process.env.PLAYHT_USER_ID,
+      },
+      body: JSON.stringify({
+        voice: 'en-US-MichelleNeural', // Update this to the desired voice ID
+        content: [text],
+      }),
+    });
+
+    const json = await response.json();
+    res.send(json);
+  } catch (error) {
+    res.status(500).send({ message: 'Error making request to Play.ht API' });
+  }
+});
+
+// endpoint to handle the transcriptionId route
+app.get('/api/audio-status/:transcriptionId', async (req, res) => {
+  const { transcriptionId } = req.params;
+
+  try {
+    const fetch = (await import('node-fetch')).default;
+    const response = await fetch(`https://play.ht/api/v1/articleStatus?transcriptionId=${transcriptionId}`, { // Change the endpoint URL
+      method: 'GET',
+      headers: {
+        'Authorization': process.env.PLAYHT_API_KEY,
+        'X-User-ID': process.env.PLAYHT_USER_ID,
+      },
+    });
+
+    const responseText = await response.text(); // Read the raw response text
+    console.log('Play.ht API raw response:', responseText); // Log the raw response text
+
+    const json = JSON.parse(responseText); // Manually parse the JSON
+    res.send(json);
+  } catch (error) {
+    console.error('Error fetching audio status from Play.ht API:', error);
+    res.status(500).send({ message: 'Error fetching audio status from Play.ht API' });
+  }
+});
+
+app.post('/api/webhook', async (req, res) => {
+  const data = req.body;
+
+  if (data.status === 'SUCCESS') {
+    // Process the audio file URL and update the audio player
+    // e.g., send the audio URL to the client via WebSocket or save it in a database
+    console.log('Audio URL:', data.metadata.output[0]);
+  }
+
+  res.sendStatus(200);
+});
+
+
 
 
 //start the port
