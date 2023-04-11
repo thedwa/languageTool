@@ -23,7 +23,7 @@ if (formBlock) {
     };
     
     const prompt = languagePrompts[languageMC];
-    console.log(`prompt: ${prompt}`);
+    console.log(`GPT prompt: ${prompt}`);
     
     const data = {
         "model": "gpt-3.5-turbo",
