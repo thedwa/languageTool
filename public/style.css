@@ -554,6 +554,10 @@ body {
   top: 10px;
   margin: 10px;
   width: 15px;
-  height: 15px;
-  
+  height: 15px; 
+}
+
+#personalizedLearning {
+  background-color: #ffffff;
+  border: none;
 }
