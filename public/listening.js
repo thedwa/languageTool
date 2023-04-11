@@ -63,3 +63,19 @@ function setLoading(loading) {
         overlay.style.display = 'none';
     }
 };
+
+
+// toggle between own text and text generation
+function toggleInputOption() {
+    const enterOwnText = document.getElementById('enterOwnText');
+    const enterOwnTextSection = document.getElementById('enterOwnTextSection');
+    const generateTextSection = document.getElementById('generateTextSection');
+
+    if (enterOwnText.checked) {
+        enterOwnTextSection.style.display = 'block';
+        generateTextSection.style.display = 'none';
+    } else {
+        enterOwnTextSection.style.display = 'none';
+        generateTextSection.style.display = 'block';
+    }
+}

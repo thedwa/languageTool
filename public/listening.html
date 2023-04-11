@@ -28,16 +28,68 @@
 		<h1 class="main-heading">Listen and answer the questions</h1>
         <div class="block-text-form">
 			<div class="form-question">
-
+                
                 <form id="ttsForm">
-                    <label for="text">Enter text:</label>
-                    <textarea id="text" rows="5" cols="30"></textarea>
-                    <button type="submit">Convert Text to Speech</button>
+                    <div class="input-options">
+                        <input type="radio" id="enterOwnText" name="inputOption" value="enterOwnText" checked onchange="toggleInputOption()">
+                        <label for="enterOwnText">Enter own text</label>
+                
+                        <input type="radio" id="generateText" name="inputOption" value="generateText" onchange="toggleInputOption()">
+                        <label for="generateText">Generate text and questions</label>
+                    </div>
+                
+                    <!-- Enter own text section -->
+                    <div id="enterOwnTextSection">
+                        <h2><label for="text">Enter text:</label></h2>
+                        <textarea id="text" rows="5" cols="30"></textarea>
+                    </div>
+                
+                    <!-- Generate text and questions section -->
+                    <div id="generateTextSection" style="display: none;">
+                        <!-- Your existing code for the generate text and questions section goes here -->
+                        <p class="form-text">Generate a 
+                            <select class="select" id="languageMC" name="languageMC">
+                                <option value="French">French</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="English">English</option>
+                                <option value="Dutch">Dutch</option>
+                                <option value="German">German</option>
+                            </select> text in 
+                            <select class="select" id="timeMC" name="timeMC">
+                                <option value="present simple">Present Simple</option>
+                                <option value="past simple">Past Simple</option>
+                                <option value="future">Future</option>
+                                <option value="mixed times">Mixed Times</option>
+                            </select>, with
+                            <select class="select" id="lengthMC" name="lengthMC">
+                                <option value="40">40</option>
+                                <option value="60">60</option>
+                                <option value="80">80</option>
+                                <option value="100">100</option>
+                                <option value="120">120</option>
+                                <option value="140">140</option>
+                            </select> words, and language level 
+                            <select class="select" id="levelMC" name="levelMC">
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                            </select>. The topic should be about 
+                            <input class="topicInput" type="text" id="topicInput" name="topicInput" placeholder="Enter your topic">
+                        </p>
+                    </div>
+                
+                    <div class="action-buttons">
+                        <button type="submit" class="smallButton">Convert Text to Speech</button>
+                        <audio id="audioPlayer" controls>
+                            <source id="audioSource" src="" type="audio/mpeg">
+                        </audio>
+                    </div>
                 </form>
-                <audio id="audioPlayer" controls>
-                    <source id="audioSource" src="" type="audio/mpeg">
-                </audio>
-
+                
             </div>
         </div>
     

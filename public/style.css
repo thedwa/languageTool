@@ -527,3 +527,33 @@ body {
 #questionsh3 {
   margin-top:  20px;
 }
+
+.form-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-options {
+  margin: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#enterOwnText,
+#generateText {
+  top: 10px;
+  margin: 10px;
+  width: 15px;
+  height: 15px;
+  
+}
