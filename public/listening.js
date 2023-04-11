@@ -1,6 +1,32 @@
 document.getElementById('ttsForm').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const text = document.getElementById('text').value;
+
+    function getText() {
+        const enterOwnTextRadio = document.getElementById("enterOwnText");
+        const generateTextRadio = document.getElementById("generateText");
+
+        if (enterOwnTextRadio.checked) {
+            const text = document.getElementById("text").value;
+            return text;
+        } else if (generateTextRadio.checked) {
+            const language = document.getElementById("languageMC").value;
+            const time = document.getElementById("timeMC").value;
+            const length = document.getElementById("lengthMC").value;
+            const level = document.getElementById("levelMC").value;
+            const topic = document.getElementById("topicInput").value;
+
+            const generatedText = `Generate a ${language} text in ${time}, with ${length} words, and language level ${level}. The topic should be about ${topic}.`;
+            return generatedText;
+        }
+    }
+
+
+
+    const text = getText();
+    console.log(text);
+
+
+
   
     if (text) {
       setLoading(true);
