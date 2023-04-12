@@ -1,4 +1,7 @@
+let generatedSolution = "";
+
 document.getElementById('ttsForm').addEventListener('submit', async (event) => {
+    setLoading(true);
     event.preventDefault();
 
     const languageMC = document.getElementById("languageMC").value;
@@ -16,32 +19,31 @@ document.getElementById('ttsForm').addEventListener('submit', async (event) => {
         "Dutch": `Doe alsof je een leraar bent. Schrijf een tekst in ${languageMC} met ongeveer ${lengthMC} woorden op het taalniveau ${levelMC}. Gebruik de tijdvorm ${timeMC}. Stel dan 5 vragen over de inhoud van de tekst. Het gaat over het onderwerp ${topicInput}`,
     };
     
-    const prompt = languagePrompts[languageMC];
-    console.log(`GPT prompt: ${prompt}`);
-    
-    const data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": `${prompt} 
+    const generateTextRadio = document.getElementById("generateText");
+    if (generateTextRadio.checked) {
+        const prompt = languagePrompts[languageMC];
+            const data = {
+            "model": "gpt-3.5-turbo",
+            "messages": [{"role": "user", "content": `${prompt} 
 
-        `}],
-        "temperature": 0.7
-      }
+            `}],
+            "temperature": 0.7
+        }
 
-      console.log(data.messages);
-      
-      const response = await fetch('/api/generate-gap-text', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      const json = await response.json();
-      const solution = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No solution found.';
-      console.log("the solution is: ")
-      console.log(solution);
-
+        console.log(data.messages);
+        
+        const response = await fetch('/api/generate-gap-text', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        
+        const json = await response.json();
+        const solution = json.choices && json.choices.length > 0 ? json.choices[0].message.content.trim() : 'No solution found.';
+        generatedSolution = solution;
+    }
 
 
     function getText() {
@@ -50,23 +52,23 @@ document.getElementById('ttsForm').addEventListener('submit', async (event) => {
 
         if (enterOwnTextRadio.checked) {
             const text = document.getElementById("text").value;
+            generatedSolution = text;
             return text;
         } else if (generateTextRadio.checked) {
-            const generatedText = solution;
+            const generatedText = generatedSolution;
             return generatedText;
         }
     }
 
 
-
     const text = getText();
-    console.log(text);
+    console.log(`Text to convert: ${text}`);
 
 
 
   
     if (text) {
-      setLoading(true);
+
       const response = await fetch('/api/text-to-speech', {
         method: 'POST',
         headers: {
@@ -142,3 +144,20 @@ function toggleInputOption() {
         generateTextSection.style.display = 'block';
     }
 }
+
+
+//expand section with the written text
+const revealBtn = document.getElementById('expandButton'); // Update the selector
+revealBtn.addEventListener('click', () => {
+  const revealTextSection = document.querySelector('.reveal-text-section');
+  const revealText = document.querySelector('.reveal-text');
+
+  if (revealTextSection.style.display === 'none') {
+    revealTextSection.style.display = 'block';
+    revealText.textContent = generatedSolution; // Use the global variable here
+    revealBtn.textContent = 'Hide Text';
+  } else {
+    revealTextSection.style.display = 'none';
+    revealBtn.textContent = 'Reveal Text';
+  }
+});
