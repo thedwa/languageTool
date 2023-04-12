@@ -18,6 +18,16 @@ document.getElementById('ttsForm').addEventListener('submit', async (event) => {
         "Italian": `Agisci come un insegnante. Scrivi un testo in ${languageMC} con circa ${lengthMC} parole al livello linguistico ${levelMC}. Usa il tempo ${timeMC}. Poi fai 5 domande sul contenuto del testo. È un argomento ${topicInput}`,
         "Dutch": `Doe alsof je een leraar bent. Schrijf een tekst in ${languageMC} met ongeveer ${lengthMC} woorden op het taalniveau ${levelMC}. Gebruik de tijdvorm ${timeMC}. Stel dan 5 vragen over de inhoud van de tekst. Het gaat over het onderwerp ${topicInput}`,
     };
+
+    const languageVoices = {
+        "German": "de-DE_BirgitV3Voice",
+        "English": "en-US-MichelleNeural",
+        "French": "fr-FR-Standard-A",
+        "Spanish": "Enrique",
+        "Italian": "it-IT-Wavenet-A",
+        "Dutch": "nl-NL-Wavenet-B",
+      };
+    
     
     const generateTextRadio = document.getElementById("generateText");
     if (generateTextRadio.checked) {
@@ -68,14 +78,14 @@ document.getElementById('ttsForm').addEventListener('submit', async (event) => {
 
   
     if (text) {
-
-      const response = await fetch('/api/text-to-speech', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ text })
-      });
+        const voice = languageVoices[languageMC];
+        const response = await fetch('/api/text-to-speech', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text, voice })
+          });
   
       const data = await response.json();
   

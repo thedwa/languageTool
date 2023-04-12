@@ -92,7 +92,7 @@ app.delete("/api/delete-word/:id", async (req, res) => {
   
 // Add the Play.ht API endpoint ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 app.post('/api/text-to-speech', async (req, res) => {
-  const { text } = req.body;
+  const { text, voice } = req.body;
 
   try {
     const fetch = (await import('node-fetch')).default;
@@ -104,7 +104,7 @@ app.post('/api/text-to-speech', async (req, res) => {
         'X-User-ID': process.env.PLAYHT_USER_ID,
       },
       body: JSON.stringify({
-        voice: 'en-US-MichelleNeural', // Update this to the desired voice ID
+        voice: voice, // Update this to the desired voice ID
         content: [text],
       }),
     });
