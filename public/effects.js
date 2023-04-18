@@ -22,3 +22,4 @@ updateWord(); // Set the initial word
 setInterval(() => {
   changeWordWithFade();
 }, 4000); // Update the word every 5 seconds
+
