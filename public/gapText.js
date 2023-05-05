@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const prompt = languagePrompts[languageMC];
       console.log(prompt);
       const data = {
-        "model": "gpt-3.5-turbo",
+        "model": "gpt-4",
         "messages": [{"role": "user", "content": `${prompt} 
 
         `}],

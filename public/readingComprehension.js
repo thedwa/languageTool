@@ -101,7 +101,7 @@ function displayQuestionsWithInputs(solution) {
     
         // Send the prompt to the OpenAI API
         const data = {
-            "model": "gpt-3.5-turbo",
+            "model": "gpt-4",
             "messages": [{"role": "user", "content": `${prompt}`}],
             "temperature": 0.7
         }
