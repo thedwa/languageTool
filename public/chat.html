@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Gap Text</title>
+	<link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="listening.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<header>
+		<nav>
+			<ul class="nav-menu">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="gapText.html">Gap Text</a></li>
+				<li><a href="readingComprehension.html">Reading</a></li>
+				<li><a href="listening.html">Listening</a></li>
+                <li><a href="chat.html">Chat</a></li>
+				<li><a href="vocabulary.html">Vocabulary</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+
+        <div class="overlay">
+            <div class="spinner"></div>
+          </div>
+          
+		<h1 class="main-heading">Listen and answer the questions</h1>
+        <div class="block-text-form">
+			<div class="form-question">
+                
+                <form id="ttsForm">
+                    <div class="input-options">
+                        <input type="radio" id="enterOwnText" name="inputOption" value="enterOwnText" checked onchange="toggleInputOption()">
+                        <label for="enterOwnText">Spoken Conversation</label>
+                
+                        <input type="radio" id="generateText" name="inputOption" value="generateText" onchange="toggleInputOption()">
+                        <label for="generateText">Chat Conversation</label>
+                    </div>
+                
+                    <!-- Enter own text section -->
+                    <div id="enterOwnTextSection">
+                        <h2><label for="text">Enter text:</label></h2>
+                        <textarea id="text" rows="5" cols="30"></textarea>
+                    </div>
+                
+                    <!-- Generate text and questions section -->
+                    <div id="generateTextSection" style="display: none;">
+                        <!-- Your existing code for the generate text and questions section goes here -->
+                        <p class="form-text">Generate a 
+
+                            <input class="topicInput" type="text" id="topicInput" name="topicInput" placeholder="Enter your topic">
+                        </p>
+                    </div>
+
+                </form>
+                
+            </div>
+        </div>
+    
+        <div class="solution-container">
+            <h2 class="solution-heading">Result:</h2>
+            <button class="smallButton" id="expandButton">Reveal Text</button>
+            <div class="reveal-text-section" style="display: none;">
+                <p class="reveal-text"></p>
+            </div>
+
+        </div>
+    </main>
+</body>
+</html>
