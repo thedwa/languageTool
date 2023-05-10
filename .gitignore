@@ -21,3 +21,6 @@ Thumbs.db
 *.swp
 *.bak
 *.tmp
+
+# Application-specific files
+config.js
