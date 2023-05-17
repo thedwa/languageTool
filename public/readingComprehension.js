@@ -2,6 +2,8 @@
 const formBlock = document.querySelector('.block-text-form');
 const solutionTextBlock = document.querySelector('.solution-text');
 
+
+
 if (formBlock) {
     formBlock.addEventListener('submit', async (e) => {
         e.preventDefault();
